@@ -330,7 +330,8 @@ protected void onResume() {
                     public void onAdLoaded(@NonNull RewardedAd rewardedAd) {
                         mRewardedAd = rewardedAd;
                         Log.d(TAG, "Ad was loaded.");
-                       // mRewardedAd.show(MainActivity.this);
+                        Toast.makeText(MainActivity.this,"Hello RewardedAd  Loaded",Toast.LENGTH_LONG).show();
+                        // mRewardedAd.show(MainActivity.this);
                         mRewardedAd.show(MainActivity.this, new OnUserEarnedRewardListener() {
                             @Override
                             public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
