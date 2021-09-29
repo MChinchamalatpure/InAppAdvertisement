@@ -60,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
     //For local Notification
     public static final String NOTIFICATION_CHANNEL_ID = "10001" ;
     private final static String default_notification_channel_id = "default" ;
-
+//Before loading ads, have your app initialize the Mobile Ads SDK by calling MobileAds.initialize()
+// which initializes the SDK and calls back a completion listener once initialization is complete
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         IronSource.setOfferwallListener(mOfferwallListener);
         IronSource.init(this, APP_KEY);
         IntegrationHelper.validateIntegration(this);
-        MobileAds.initialize(this);
+        MobileAds.initialize(this);//this is to be done only once
 
         btnBanner = findViewById(R.id.Banner);
         btnInterstitial = findViewById(R.id.Interstitial);
@@ -246,13 +247,14 @@ protected void onResume() {
 
 
     public void ShowBanner() {
-
+//for adding adview via programming...
         //AdView adView = new AdView(this);
 
         //adView.setAdSize(AdSize.BANNER);
 
         //adView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
 
+        //load the add in your application...
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.setBottom(Gravity.BOTTOM);
@@ -290,7 +292,7 @@ protected void onResume() {
         });
     }
 
-
+//Load the interstital add
     public void ShowInterstitial() {
         AdRequest adRequest = new AdRequest.Builder().build();
 
@@ -313,10 +315,9 @@ protected void onResume() {
                     }
                 });
     }
-
+//load the rewarded vedio ad...
     public void ShowRewardedVedio() {
         AdRequest adRequest = new AdRequest.Builder().build();
-
         RewardedAd.load(this, "ca-app-pub-3940256099942544/5224354917",
                 adRequest, new RewardedAdLoadCallback() {
                     @Override
@@ -339,6 +340,8 @@ protected void onResume() {
                                 Log.d(TAG, "The user earned the reward.");
                                 int rewardAmount = rewardItem.getAmount();
                                 String rewardType = rewardItem.getType();
+                                Toast.makeText(MainActivity.this,"Hello The user earned the reward.",Toast.LENGTH_LONG).show();
+
                             }
                         });
                     }
